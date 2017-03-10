@@ -2,20 +2,47 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>IFE JavaScript Task 01</title>
+<title>IFE JavaScript Task 02</title>
 </head>
 <body>
-	<label>请输入深圳今天空气质量：<input id="aqi-input" type="text"></label>
-	<button id="button">确认填写</button>
-
-	<div>您输入的值是：<span id="aqi-display">尚无录入</span></div>
-
-	<script type="text/javascript">
-		(function() {
-			document.getElementById('button').onclick=function(){
-				document.getElementById('aqi-display').innerHTML=document.getElementById('aqi-input').value;
-			}
+	<h3>污染城市列表</h3>
+	<ul id="aqi-list">
 		
+	</ul>	
+	<script type="text/javascript">
+		var aqiData = [
+			["北京", 90],
+			["上海", 50],
+			["福州", 10],
+			["广州", 50],
+			["成都", 90],
+			["西安", 100]
+		];
+		(function () {
+			var aqiList=document.getElementById('aqi-list');
+			var aqiArr=[];
+			//筛选出目标数组
+			for(var i=0;i<aqiData.length;i++){
+				if(aqiData[i][1]>60){
+					aqiArr.push(aqiData[i]);
+				}
+			}
+			//从大到小冒泡排序
+			for(var i=1;i<aqiArr.length;i++){
+				for(var j=0;j<aqiArr.length-i;j++){
+					var temp=null;
+					if(aqiArr[j][1]<aqiArr[j+1][1]){
+						temp=aqiArr[j];
+						aqiArr[j]=aqiArr[j+1];
+						aqiArr[j+1]=temp;
+					}
+				}
+			}
+			for(var i=0;i<aqiArr.length;i++){
+				var li=document.creatElement('li');
+				li.innerHTML="第一枚";
+				aqiList.append(li);
+			}
 		})();
 	</script>
 </body>
